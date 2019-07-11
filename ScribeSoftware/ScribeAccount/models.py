@@ -10,7 +10,7 @@ class ScribeAccount(models.Model):
         return self.user.username
 
 class ScribeCredentials(models.Model):
-    scribe_profile = models.ForeignKey(ScribeAccount, on_delete=models.CASCADE)
+    scribe_profile = models.OneToOneField(ScribeAccount, on_delete=models.CASCADE)
     twitterKey = models.CharField(max_length=240)
     twitterSecret = models.CharField(max_length=240)
     twitterAPIKey = models.CharField(max_length=240)
