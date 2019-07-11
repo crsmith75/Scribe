@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ScribeAccount.models import ScribeAccount
+from ScribeAccount.models import ScribeAccount, ScribeCredentials
 
 class ScribeAccountSerializer(serializers.ModelSerializer):
 
@@ -15,3 +15,11 @@ class ScribeAccountAvatarSerializer(serializers.ModelSerializer):
     class Meta:
         model = ScribeAccount
         fields = ("avatar")
+    
+class ScribeCredentialsSerializer(serializers.ModelSerializer):
+
+    scribe_profile = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = ScribeCredentials
+        fields = "__all__"
