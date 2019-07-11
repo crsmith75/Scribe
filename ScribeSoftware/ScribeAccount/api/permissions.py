@@ -15,3 +15,4 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         return obj.scribe_profile == request.user.scribeaccount
+

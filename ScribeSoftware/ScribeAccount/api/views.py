@@ -37,7 +37,7 @@ class ScribeCredentialsViewSet(ModelViewSet):
         queryset = ScribeCredentials.objects.all()
         username = self.request.query_params.get("username", None)
         if username is not None:
-            queryset = queryset.filter(scribe_profile_user_username=username)
+            queryset = queryset.filter(user_profile_user_username=username)
         return queryset
 
     #We override create function because we want to automatically connect status instance to the profile instance making it as soon as it is made
