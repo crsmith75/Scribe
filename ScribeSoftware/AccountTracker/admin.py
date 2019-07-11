@@ -1,3 +1,4 @@
 from django.contrib import admin
+from AccountTracker.models import TrackedTwitterAccount
 
-# Register your models here.
+admin.site.register(TrackedTwitterAccount)
