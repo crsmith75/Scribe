@@ -20,3 +20,12 @@ class ScribeCredentials(models.Model):
 
     def __str__(self):
         return str(self.scribe_profile)
+
+class TrackedTwitterAccount(models.Model):
+    scribe_profile = models.ForeignKey(ScribeAccount, on_delete=models.CASCADE)
+    twitter_handle = models.CharField(max_length = 100)
+    twitter_id = models.IntegerField(unique=False)
+    tracking_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{ self.twitter_handle } { self.twitter_id }"
