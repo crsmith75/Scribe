@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Account.models import Account
+from Account.models import Account, TwitterAccount
 
 class AccountSerializer(serializers.ModelSerializer):
 
@@ -15,3 +15,11 @@ class AccountAvatarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ("avatar")
+
+class TwitterAccountSerializer(serializers.ModelSerializer):
+
+    user_account = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = TwitterAccount
+        fields = "__all__"
