@@ -1,2 +1,0 @@
-# Scribe
-TwitterScribe Software Refactor
