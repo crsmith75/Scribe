@@ -10,10 +10,6 @@ django = "*"
 djangorestframework = "*"
 django-allauth = "*"
 django-rest-auth = "*"
-pillow = "*"
-faust = "*"
-tweepy = "*"
-kafka-python = "*"
 
 [requires]
 python_version = "3.6"
