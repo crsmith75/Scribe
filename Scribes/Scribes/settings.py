@@ -153,6 +153,7 @@ ACCOUNT_EMAIL_REQUIRED = (True)
 
 #Django-REST-Framework
 #forces users to have token and session authentication
+#Since we only want authenticated users to be on the platform, we define permission classes globally
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -160,7 +161,5 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination', 
-    'PAGE_SIZE': 4
+    )
 }
