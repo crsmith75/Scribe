@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'webpack_loader',
+    'material',
 
     'users',
     'twitteraccounts'
