@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'webpack_loader',
     'material',
+    'materialize',
 
     'users',
     'twitteraccounts'
@@ -145,7 +146,7 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = "users.CustomUser"
 
 # django-crispy-forms
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+#CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # django.contrib.sites
 SITE_ID = 1
