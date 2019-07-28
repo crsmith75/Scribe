@@ -1,0 +1,16 @@
+{% extends 'auth_layout.html' %}
+{% load crispy_forms_tags %}
+{% load material_form %}
+
+{% block auth %}
+<h3>Become A Scribe Today!</h3>
+<div class="registration-form-container">
+    <form method="POST">
+        {% csrf_token %}
+        {% form form=form %}{% endform %}
+        <button type="submit" class="waves-effect waves-light btn">Create Account</button>
+    </form>
+    <p class="mt-2">Or <a href="{% url 'login' %}">Login</a></p>
+</div>
+
+{% endblock %}

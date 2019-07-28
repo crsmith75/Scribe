@@ -1,0 +1,16 @@
+{% extends 'auth_layout.html' %}
+{% load material_form %}
+
+{% block auth %}
+<h1>Scribe</h1>
+<p class="lead text-muted">Secure Twitter With Factom!</p>
+<div class="login-form-container">
+    <form method="POST">
+        {% csrf_token %}
+        {% form form=form %}{% endform %}
+        <button type="submit" class="waves-effect waves-light btn">Login</button>
+    </form>
+    <p class="mt-2">Or <a href="{% url 'django_registration_register' %}">Create an Account</a></p>
+</div>
+
+{% endblock %}
