@@ -19,6 +19,8 @@
 import NavbarComponent from "@/components/Navbar.vue";
 import AddAccounts from "@/components/AddAccounts.vue";
 import AccountTable from "@/components/AccountTable.vue";
+import { CSRF_TOKEN } from "@/common/csrf_token.js";
+import { apiService } from "@/common/api.service.js";
 
 export default {
     name: "App",
@@ -30,45 +32,75 @@ export default {
   },
   data() {
     return {
-      twitteraccounts: [
-        {
-          id: 1,
-          handle: 'factombot',
-          twitterid: '11234',
-        },
-        {
-          id: 2,
-          handle: 'realdonaldtrump',
-          twitterid: '3948756',
-        },
-        {
-          id: 3,
-          handle: 'fct_bot',
-          twitterid: '837987989',
-        },
-      ],
+      twitteraccounts: [],
     }
   },
   methods: {
-    addAccount(twitteraccount) {
-      const lastId =
-        this.twitteraccounts.length > 0
-          ? this.twitteraccounts[this.twitteraccounts.length - 1].id
-          : 0;
-      const id = lastId + 1;
-      const newAccount = { ...twitteraccount, id };
-
-      this.twitteraccounts = [...this.twitteraccounts, twitteraccount]
+    async setUserInfo() {
+          const data = await apiService("/api/user/");
+          const requestUser = data["username"];
+          window.localStorage.setItem("username", requestUser);
     },
-    deleteAccount(id) {
-      this.twitteraccounts = this.twitteraccounts.filter(
-        twitteraccount => twitteraccount.id !== id
-      )
+    async getAccounts() {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/twitteraccounts/')
+        const data = await response.json()
+        this.twitteraccounts = data
+      } catch (error) {
+        console.error(error)
+      }
     },
-    editAccount(id, updatedAccount) {
-      this.twitteraccounts = this.twitteraccounts.map(twitteraccount =>
-        twitteraccount.id === id ? updatedAccount : twitteraccount)
+    async addAccount(twitteraccount) {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/twitteraccounts/', {
+          method: 'POST',
+          body: JSON.stringify(twitteraccount),
+          headers: {
+            "content-type": "application/json; charset=UTF-8",
+            'X-CSRFTOKEN': CSRF_TOKEN}
+        })
+        const data = await response.json()
+        this.twitteraccounts = [...this.twitteraccounts, data]
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteAccount(id) {
+      try {
+        await fetch(`http://127.0.0.1:8000/api/twitteraccounts/${id}/`, {
+          method: 'DELETE',
+          headers: {
+            "content-type": "application/json; charset=UTF-8",
+            'X-CSRFTOKEN': CSRF_TOKEN}
+        })
+        this.twitteraccounts = this.twitteraccounts.filter(
+          twitteraccount => twitteraccount.id !== id
+        )
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async editAccount(id, updatedAccount) {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/twitteraccounts/${id}/`, {
+          method: 'PUT',
+          body: JSON.stringify(updatedAccount),
+          headers: {
+            "content-type": "application/json; charset=UTF-8",
+            'X-CSRFTOKEN': CSRF_TOKEN}
+        })
+        const data = await response.json()
+        this.twitteraccounts = this.twitteraccounts.map(
+          twitteraccount => twitteraccount.id === id ? data : twitteraccount
+          )
+      } catch (error) {
+        console.error(error)
+      }
     }
+  },
+  created() {
+    this.getAccounts()
+    this.setUserInfo()
   }
 }
 

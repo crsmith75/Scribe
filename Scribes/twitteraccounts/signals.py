@@ -8,6 +8,6 @@ from twitteraccounts.models import twitterAccount
 @receiver(pre_save, sender=twitterAccount)
 def add_slug_to_question(sender, instance, *args, **kwargs):
     if instance and not instance.slug:
-        slug = slugify(instance.twitter_handle)
+        slug = slugify(instance.handle)
         random_string = generate_random_string()
         instance.slug = slug + "-" + random_string

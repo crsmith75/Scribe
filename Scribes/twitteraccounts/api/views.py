@@ -22,30 +22,30 @@ class twitterAccountRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = twitterAccountSerializer
     permission_classes = [IsAuthenticated, IsUserOrReadOnly]
     
-class twitterAccountTrackAPIView(APIView):
-    serializer_class = twitterAccountSerializer
-    permission_classes = [IsAuthenticated, IsUserOrReadOnly]
+# class twitterAccountTrackAPIView(APIView):
+#     serializer_class = twitterAccountSerializer
+#     permission_classes = [IsAuthenticated, IsUserOrReadOnly]
 
-    def delete(self, request, pk):
-        twitteraccount = get_object_or_404(twitterAccount, pk=pk)
-        user = request.user
+#     def delete(self, request, pk):
+#         twitteraccount = get_object_or_404(twitterAccount, pk=pk)
+#         user = request.user
 
-        twitteraccount.trackers.remove(user)
-        twitteraccount.save()
+#         twitteraccount.trackers.remove(user)
+#         twitteraccount.save()
 
-        serializer_context = {"request": request}
-        serializer = self.serializer_class(twitteraccount, context=serializer_context)
+#         serializer_context = {"request": request}
+#         serializer = self.serializer_class(twitteraccount, context=serializer_context)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def post(self, request, pk):
-        twitteraccount = get_object_or_404(twitterAccount, pk=pk)
-        twitteraccount = request.user
+#     def post(self, request, pk):
+#         twitteraccount = get_object_or_404(twitterAccount, pk=pk)
+#         twitteraccount = request.user
 
-        twitteraccount.trackers.add(user)
-        answer.save()
+#         twitteraccount.trackers.add(user)
+#         answer.save()
 
-        serializer_context = {"request": request}
-        serializer = self.serializer_class(twitteraccount, context=serializer_context)
+#         serializer_context = {"request": request}
+#         serializer = self.serializer_class(twitteraccount, context=serializer_context)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
