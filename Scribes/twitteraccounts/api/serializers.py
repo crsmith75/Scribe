@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from twitteraccounts.models import twitterAccount
 
+
 class twitterAccountSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(read_only=True)
     added_at = serializers.SerializerMethodField()

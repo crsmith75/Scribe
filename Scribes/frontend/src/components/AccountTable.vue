@@ -9,6 +9,7 @@
                 <tr>
                     <th>Twitter Handle</th>
                     <th>Twitter ID</th>
+                    <th>Chain ID</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -29,7 +30,7 @@
                         />
                     </td>
                     <td v-else>{{ twitteraccount.twitterid }}</td>
-
+                    <td> {{ twitteraccount.chainid }} </td>
                     <td v-if="editing === twitteraccount.id">
                         <button
                             class="waves-effect waves-light btn" 

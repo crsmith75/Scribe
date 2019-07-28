@@ -22,7 +22,7 @@
             Please fill out all required fields
         </p>
         <p v-if="success" class="success-message">
-            Account successfully added
+            Account successfully added! Wait Momentarily while the Chain ID is created!
         </p>
         <button class="waves-effect waves-light btn">Add Account</button>
         </form>
