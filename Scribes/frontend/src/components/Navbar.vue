@@ -9,7 +9,7 @@
                  <router-link
                         :to="{ name: 'home' }"
                         class="left brand-logo"
-                    ><span class="white-text">FACTicus</span>
+                    ><span class="white-text">Scribe</span>
                     </router-link>
                 <ul class="right hide-on-med-and-down">
                 <li>
@@ -17,12 +17,6 @@
                         :to="{ name: 'home' }"
                         class="waves-effect waves-light btn"
                     >Home
-                    </router-link>
-                </li>
-                <li><router-link
-                        :to="{ name: 'home' }"
-                        class="waves-effect waves-light btn"
-                    >Add Account!
                     </router-link>
                 </li>
                 <li>

@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <NavbarComponent />
-
+    <h1>Add An Account</h1>
     <AddAccounts
       @add:twitteraccount="addAccount" />
-
+    
+    <h2>Your Tracked Accounts</h2>
     <account-table 
       :twitteraccounts="twitteraccounts"
       @delete:twitteraccount="deleteAccount" 
@@ -77,5 +78,9 @@ export default {
  html, body {
         height: 100%;
         font-family: 'Roboto', sans-serif;
+        
     }
+h1, h2 {
+  text-align: center;
+}
 </style>

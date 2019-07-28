@@ -88,4 +88,8 @@
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+th, td {
+    text-align: center;
+}
+</style>
