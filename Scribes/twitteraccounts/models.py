@@ -3,7 +3,7 @@ from django.conf import settings
 
 class twitterAccount(models.Model):
     twitter_handle = models.CharField(max_length = 100)
-    twitter_id = models.IntegerField(unique=False)
+    twitter_id = models.CharField(max_length = 100)
     added_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=255, unique=True)
@@ -14,7 +14,7 @@ class twitterAccount(models.Model):
                                       related_name="tracking")
 
     def __str__(self):
-        return f"{ self.twitter_handle } { self.twitter_id }"
+        return  self.twitter_handle
 
 # class trackingInfo(models.Model):
 #     tracked_at = models.DateTimeField(auto_now_add=True)

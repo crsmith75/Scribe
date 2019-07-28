@@ -10,7 +10,7 @@ class twitterAccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = twitterAccount
-        exclude = ["updated_at"]
+        exclude = ["updated_at", "trackers"]
 
     def get_added_at(self, instance):
         return instance.added_at.strftime("%B %d %Y")

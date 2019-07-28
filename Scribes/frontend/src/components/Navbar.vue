@@ -9,7 +9,7 @@
                  <router-link
                         :to="{ name: 'home' }"
                         class="left brand-logo"
-                    ><span class="white-text">Facticus</span>
+                    ><span class="white-text">FACTicus</span>
                     </router-link>
                 <ul class="right hide-on-med-and-down">
                 <li>
@@ -20,9 +20,9 @@
                     </router-link>
                 </li>
                 <li><router-link
-                        :to="{ name: 'about' }"
+                        :to="{ name: 'home' }"
                         class="waves-effect waves-light btn"
-                    >About
+                    >Add Account!
                     </router-link>
                 </li>
                 <li>
@@ -49,11 +49,8 @@ export default {
 .my-navbar {
   background-color: #29b6f6  !important;
 }
-.item {
-  background-color: white;
-}
 .btn {
-  background-color: white;
+  background-color: #f56f12;
 }
 .brand-logo {
     font-weight: bold;
