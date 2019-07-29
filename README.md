@@ -80,3 +80,19 @@ for the frontend application and if you navigate to http://127.0.01:8000 in your
 **Note** This two server system is still an artifact of the system being in development mode, once this moves to production,
 only a single server will need to be run
 
+You will be navigated to a Login Screen. If you have already created an account login, otherwise click 'Create An Account' and 
+then fill out the corresponding form. Once you do you will enter the home screen which is a simple UI with a form and list
+where you can add and manage the accounts you want to track. Simply enter a users twitter handle and twitter id and then a 
+chain will be created for the account. To find an account's twitter id, visit https://tweeterid.com/ and enter their twitter
+handle and the twitter id will be provided for you.
+
+## Next Steps:
+
+1.) Finish integrating faust for asynchronous task management and message queuing to create fully functional MVP(Currently Undergoing work by Consensus Networks)
+2.) Flesh out Error Handling to account for things like an invalid twitter handle or id.
+3.) Allow Scribes to add accounts other Scribes are tracking
+4.) Implement some sort of incentive structure to reward those who are tracking more accounts/tweets
+5.) Build out Consumer Facing Portion
+6.) Integrate with bot to periodically tweet every time tracked accounts have tweeted and it was secured with Factom
+7.) Deleted Tweet Detection
+8.) Integration with Identities
