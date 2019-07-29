@@ -89,10 +89,17 @@ handle and the twitter id will be provided for you.
 ## Next Steps:
 
 1.) Finish integrating faust for asynchronous task management and message queuing to create fully functional MVP(Currently Undergoing work by Consensus Networks)
+
 2.) Flesh out Error Handling to account for things like an invalid twitter handle or id.
+
 3.) Allow Scribes to add accounts other Scribes are tracking
+
 4.) Implement some sort of incentive structure to reward those who are tracking more accounts/tweets
+
 5.) Build out Consumer Facing Portion
+
 6.) Integrate with bot to periodically tweet every time tracked accounts have tweeted and it was secured with Factom
+
 7.) Deleted Tweet Detection
+
 8.) Integration with Identities
