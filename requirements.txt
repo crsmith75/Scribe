@@ -21,6 +21,7 @@ django-registration==3.0.1
 django-rest-auth==0.9.5
 django-webpack-loader==0.6.0
 djangorestframework==3.10.1
+ed25519==1.5
 factom-api==0.1.1
 faust==1.7.4
 idna==2.8
@@ -30,11 +31,15 @@ kafka-python==1.4.6
 mode==4.0.1
 multidict==4.5.2
 mypy-extensions==0.4.1
+numpy==1.17.0
 oauthlib==3.0.2
 opentracing==1.3.0
+pandas==0.25.0
 Pillow==6.1.0
 PySocks==1.7.0
+python-bitcoinlib==0.10.1
 python-dateutil==2.8.0
+python-identitykeys==0.2.1
 python3-openid==3.1.0
 pytz==2019.1
 requests==2.22.0

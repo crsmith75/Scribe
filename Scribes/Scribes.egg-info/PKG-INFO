@@ -1,0 +1,10 @@
+Metadata-Version: 1.2
+Name: Scribes
+Version: 1.0.0
+Summary: Use Faust to manage memory pool and asynchronous task management in the scribe software
+Home-page: UNKNOWN
+Author: Connor Smith
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: ~=3.6

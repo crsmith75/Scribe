@@ -1,10 +1,21 @@
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
-from twitteraccounts.api.utils import createChain
+
+import json
+from kafka import SimpleProducer, KafkaClient, KafkaConsumer
+import pickle
 
 from core.utils import generate_random_string
 from twitteraccounts.models import twitterAccount
+
+from twitteraccounts.api.asyncfxns import tweetFetcher
+from twitteraccounts.api.credentials import TWITTER_KEY, TWITTER_SECRET, TWITTER_APP_KEY, TWITTER_APP_SECRET
+from twitteraccounts.api.utils import createChain
+from twitteraccounts.api.utils import sendTweets
+
+import os
+import time
 
 @receiver(pre_save, sender=twitterAccount)
 def add_slug_to_question(sender, instance, *args, **kwargs):
@@ -18,4 +29,13 @@ def add_chainid(sender, instance, *args, **kwargs):
     if instance and not instance.chainid:
         chainid = createChain(instance.twitterid)
         instance.chainid = chainid
+
+@receiver(post_save, sender=twitterAccount)
+def send_toMem(sender, instance, *args, **kwargs):
+    kafka = KafkaClient("localhost:9092")
+    producer = SimpleProducer(kafka, value_serializer=lambda m: json.dumps(m).encode('utf-8'))
+    pickled_account = pickle.dumps(instance)
+    producer.send_messages('Scribes-faust', (pickled_account))
+
+
 
