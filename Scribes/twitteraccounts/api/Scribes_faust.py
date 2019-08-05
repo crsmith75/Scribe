@@ -11,7 +11,7 @@ from typing import List
 
 from twitteraccounts.api.credentials import FCT_ADDRESS, EC_ADDRESS, TWITTER_KEY, TWITTER_SECRET, TWITTER_APP_KEY, TWITTER_APP_SECRET
 from twitteraccounts.api.utils import filterTweets, getAllTweets, factomizeTweets, reconstructTweet, sendTweets, getTwitterCredentials
-from twitteraccounts.api.asyncfxns import tweetFetcher
+from twitteraccounts.api.asyncfxns import tweetFetcher, StreamListener
 
 app = faust.App('Scribes_faust',  broker='kafka://localhost:9092')
 
@@ -84,11 +84,8 @@ async def getAccounts(base_topic):
         for message in consumer:
             raw_tweetid = message.value
             tweetid = raw_tweetid.decode("utf-8") 
-            print(str(tweetid))
-            print(chain_id)
             factomizeTweets((tweetid),(chain_id)) #Write tweet to Factom
             print(str(tweetid) + ' Success!')
             time.sleep(10)
 
             consumer.close()
-            

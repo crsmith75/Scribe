@@ -1,5 +1,7 @@
+import csv
 from datetime import datetime
 from factom import Factomd, FactomWalletd, exceptions #python Factom API
+import identitykeys
 import json
 from kafka import SimpleProducer, KafkaClient, KafkaConsumer
 import os
@@ -21,7 +23,7 @@ def createChain(tweet_id):
     ec_address = EC_ADDRESS
 
     factomd = Factomd(
-    host='http://18.222.184.135:8088',
+    host='Your Factom Testnet Host:8088',
     fct_address=fct_address,
     ec_address=ec_address,
     username='rpc_username',
@@ -29,7 +31,7 @@ def createChain(tweet_id):
     )
 
     walletd = FactomWalletd(
-    host='http://18.222.184.135:8089',
+    host='Your Factom Testnet Host :8089',
     fct_address=fct_address,
     ec_address=ec_address,
     username='rpc_username',
@@ -37,7 +39,7 @@ def createChain(tweet_id):
     )
 
     resp = walletd.new_chain(factomd, 
-                            [ "TwitterBank Record",str(tweet_id), "testing_web_app10"],
+                            [ "TwitterBank Record",str(tweet_id), "testing_web_app54"],
                             "This is the start of this users TwitterBank Records", 
                             ec_address=ec_address) 
                     
@@ -97,7 +99,7 @@ def factomizeTweets(tweetid,chain_id):
             chain_id = str(chain_id)
                 
             resp = walletd.new_entry(factomd, chain_id, 
-                                    [ 'TwitterBank Chain',user_id, tweet_id, public, sig],
+                                    [ "TwitterBank Chain",user_id, tweet_id, public, sig],
                                     json.dumps(fct_entry), ec_address=ec_address) # makes entry into the factom testnet
                 
             entryhash = resp['entryhash']
@@ -146,6 +148,26 @@ def filterTweets(file):
 
     return new_csv
 
+# Fxn used to filter tweets for a streamer object so that only tweets actually from the tacked account trigger a response
+def fromCreator(status):
+    if hasattr(status, 'retweeted_status'):
+        #print('removed retweets')
+        return False
+    
+    elif status.in_reply_to_status_id != None:
+        #print('removed replies')
+        return False
+        
+    elif status.in_reply_to_screen_name != None:
+        #print('removed replies')
+        return False
+    
+    elif status.in_reply_to_user_id != None:
+        #print('removed replies')
+        return False
+    else:
+        return True
+
 """
 This is a function used to gather ~3000 of an account's most recent tweets and write them to a csv
 file for analysis. It takes a user's twitter handle as an input and then will continue iterating
@@ -188,7 +210,25 @@ def getAllTweets(screen_name):
 		writer.writerows(outtweets)
 	
 	pass
+# A Fxn version of the python-identies implemenation in the factomizeTweets Fxn.
+def getKeys():
+    private_key, public_key = identitykeys.generate_key_pair()
+    private = private_key.to_string()
+    public = public_key.to_string()
+    message = b'TwitterBank Record'
+    signature = private_key.sign(message)
+    sig = signature
 
+    return public, sig 
+
+#A function to recreate a tweet/status object using a tweet id  and then formulate an fct entry for it
+def reconstructTweet(tweetid):
+     status = api.get_status(int(tweetid))
+
+     fct_entry = {'Date_Recorded': str(datetime.now()),
+                'tweet': status._json}
+    
+     return fct_entry
 """
 Below is a function that takes a csv file as an input as well as a kafka topic (in this case twitter handle).
 and then reads the file, isolates on the tweet ids and then writes them to a kafka stream, through a kafka-producer
@@ -214,4 +254,12 @@ def sendTweets(file, topic):
                 time.sleep(60 * 15)
                 print('this messed up')
                 continue
+
+def getTwitterCredentials(TWITTER_KEY, TWITTER_SECRET, TWITTER_APP_KEY, TWITTER_APP_SECRET):
+
+    auth = tweepy.OAuthHandler(TWITTER_KEY, TWITTER_SECRET) #Gathers Twitter Keys
+    auth.set_access_token(TWITTER_APP_KEY, TWITTER_APP_SECRET) #Gathers Twitter APP Keys
+    api = tweepy.API(auth)
+
+    return api
 

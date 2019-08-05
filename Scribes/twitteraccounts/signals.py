@@ -7,7 +7,9 @@ from kafka import SimpleProducer, KafkaClient, KafkaConsumer
 import pickle
 
 from core.utils import generate_random_string
+from django.core import serializers
 from twitteraccounts.models import twitterAccount
+from twitteraccounts.api.serializers import twitterAccountSerializer
 
 from twitteraccounts.api.asyncfxns import tweetFetcher
 from twitteraccounts.api.credentials import TWITTER_KEY, TWITTER_SECRET, TWITTER_APP_KEY, TWITTER_APP_SECRET
@@ -32,10 +34,13 @@ def add_chainid(sender, instance, *args, **kwargs):
 
 @receiver(post_save, sender=twitterAccount)
 def send_toMem(sender, instance, *args, **kwargs):
+    account = serializers.serialize('json', [ instance, ])
+    twitteraccount  = account[1:-1]
+    time.sleep(600)
     kafka = KafkaClient("localhost:9092")
-    producer = SimpleProducer(kafka, value_serializer=lambda m: json.dumps(m).encode('utf-8'))
-    pickled_account = pickle.dumps(instance)
-    producer.send_messages('Scribes-faust', (pickled_account))
+    producer = SimpleProducer(kafka, value_serializer=lambda x: json.dumps(x).encode('utf-8'))
+    print(twitteraccount)
+    producer.send_messages('Scribes-faust', json.dumps(twitteraccount).encode('utf-8'))
 
 
 
