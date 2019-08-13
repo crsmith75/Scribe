@@ -24,7 +24,9 @@
         <p v-if="success" class="success-message">
             Account successfully added! Wait Momentarily while the Chain ID is created!
         </p>
-        <button class="waves-effect waves-light btn">Add Account</button>
+        <md-button 
+          v-on:click="notify"
+          class="md-raised">Add Account</md-button>
         </form>
     </div>
   </div>
@@ -77,6 +79,9 @@
         clearStatus() {
             this.success = false
             this.error = false
+        },
+        notify: function(event) {
+          alert(this.twitteraccount.handle + ' is now being tracked! We will notify you when their tweets begin being Factomized!')
         }
     }
   }
@@ -97,5 +102,8 @@
 
   .success-message {
     color: #32a95d;
+  }
+  .md-button {
+    background-color: #f56f12;
   }
 </style>

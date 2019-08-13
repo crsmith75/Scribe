@@ -61,8 +61,6 @@ idna_ssl = "==1.1.0"
 mypy_extensions = "==0.4.1"
 Pillow = "==6.1.0"
 PySocks = "==1.7.0"
-csv = "*"
-json = "*"
 
 [requires]
 python_version = "3.6"

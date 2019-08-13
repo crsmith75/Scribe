@@ -4,62 +4,25 @@
             <p v-if="twitteraccounts.length < 1" class="empty-table">
                 No account
             </p>
-            <table v-else>
-             <thead>
-                <tr>
-                    <th>Twitter Handle</th>
-                    <th>Twitter ID</th>
-                    <th>Chain ID</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="twitteraccount in twitteraccounts" :key="twitteraccount.id">
-                    <td v-if="editing === twitteraccount.id">
-                        <input
-                            input type="text"
-                            v-model="twitteraccount.handle"
-                        />
-                    </td>
-                    <td v-else>{{ twitteraccount.handle }}</td>
+            <md-table v-model="twitteraccounts" md-card v-else>
+                <md-table-toolbar>
+                    <h1 class="md-title">Tracked Twitter Accounts</h1>
+                </md-table-toolbar>
 
-                    <td v-if="editing === twitteraccount.id">
-                        <input
-                            input type="text"
-                            v-model="twitteraccount.twitterid"
-                        />
-                    </td>
-                    <td v-else>{{ twitteraccount.twitterid }}</td>
-                    <td> {{ twitteraccount.chainid }} </td>
-                    <td v-if="editing === twitteraccount.id">
-                        <button
-                            class="waves-effect waves-light btn" 
-                            @click="editAccount(twitteraccount)"
-                            >Save
-                            </button>
-                        <button 
-                            class="muted-button waves-effect waves-light btn" 
-                            @click="editing = null"
-                            >Cancel
-                        </button>
-                    </td>
-    
-                    <td v-else>
-                        <button 
-                            class="waves-effect waves-light btn"
-                            @click="editMode(twitteraccount.id)"
-                            > Edit
-                        </button>
-                        <button 
-                            class="waves-effect waves-light btn"
-                            @click="$emit('delete:twitteraccount', twitteraccount.id)"
+                <md-table-row slot="md-table-row" slot-scope="{ item }">
+                    <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
+                    <md-table-cell md-label="Twitter Handle" md-sort-by="handle"> {{item.handle}}</md-table-cell>
+                    <md-table-cell md-label="Twitter ID" md-sort-by="twitterid"> {{item.twitterid}}</md-table-cell>
+                    <md-table-cell md-label="Chain ID" md-sort-by="chainid"> {{item.chainid}}</md-table-cell>
+                    <md-table-cell md-label="Stop Tracking"> 
+                        <md-button 
+                            class="md-raised"
+                            @click="$emit('delete:twitteraccount', item.id)"
                             > Delete
-                        </button>
-                    </td>
-
-                </tr>
-            </tbody>
-            </table>
+                        </md-button>
+                    </md-table-cell>
+                </md-table-row>
+            </md-table>
         </div>
   </div>
 </template>
@@ -70,27 +33,17 @@
     props: {
         twitteraccounts: Array,
     },
-    data() {
-        return {
-            editing: null,
-        }
-    },
-    methods: {
-        editMode(id) {
-            this.editing = id
-        },
-
-        editAccount(twitteraccount) {
-            if (twitteraccount.handle === '' || twitteraccount.twitterid === '') return
-            this.$emit('edit:twitteraccount', twitteraccount.id, twitteraccount)
-            this.editing = null
-        }
-    }
   }
 </script>
 
 <style scoped>
-th, td {
+.md-button {
+    background-color: #f56f12;
+  }
+.md-title {
+    text-align: left;
+}
+.md-label {
     text-align: center;
 }
 </style>

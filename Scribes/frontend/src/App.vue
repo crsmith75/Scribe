@@ -5,11 +5,10 @@
     <AddAccounts
       @add:twitteraccount="addAccount" />
     
-    <h2>Your Tracked Accounts</h2>
     <account-table 
       :twitteraccounts="twitteraccounts"
       @delete:twitteraccount="deleteAccount" 
-      @edit:twitteraccount="editAccount"/>
+      />
 
     <router-view />
   </div>
@@ -27,7 +26,7 @@ export default {
     components: {
       NavbarComponent,
       AddAccounts,
-      AccountTable
+      AccountTable,
 
   },
   data() {

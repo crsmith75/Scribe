@@ -17,13 +17,14 @@ auth = tweepy.OAuthHandler(TWITTER_KEY, TWITTER_SECRET) #Gathers Twitter Keys
 auth.set_access_token(TWITTER_APP_KEY, TWITTER_APP_SECRET) #Gathers Twitter APP Keys
 api = tweepy.API(auth)
 
-def createChain(tweet_id):
+def createChain(twitterid):
 
+    tweet_id = twitterid
     fct_address = FCT_ADDRESS
     ec_address = EC_ADDRESS
 
     factomd = Factomd(
-    host='Your Factom Testnet Host:8088',
+    host='http://18.222.184.135:8088',
     fct_address=fct_address,
     ec_address=ec_address,
     username='rpc_username',
@@ -31,7 +32,7 @@ def createChain(tweet_id):
     )
 
     walletd = FactomWalletd(
-    host='Your Factom Testnet Host :8089',
+    host='http://18.222.184.135:8089',
     fct_address=fct_address,
     ec_address=ec_address,
     username='rpc_username',
@@ -39,9 +40,9 @@ def createChain(tweet_id):
     )
 
     resp = walletd.new_chain(factomd, 
-                            [ "TwitterBank Record",str(tweet_id), "testing_web_app54"],
+                            [ "TwitterBank Record",str(tweet_id), "frontendrefinement8"],
                             "This is the start of this users TwitterBank Records", 
-                            ec_address=ec_address) 
+                            ec_address=EC_ADDRESS) 
                     
     chain_ID = resp['chainid']
     time.sleep(1)
