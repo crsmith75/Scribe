@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <NavbarComponent />
-    <h1>Add An Account</h1>
+      <div class="container">
+        <h2>Start Securing the Twittersphere With the Power of the Factom Blockchain! </h2>
+      </div>
     <AddAccounts
       @add:twitteraccount="addAccount" />
     
@@ -111,7 +113,8 @@ export default {
         font-family: 'Roboto', sans-serif;
         
     }
-h1, h2 {
+h1, h2, h3 {
   text-align: center;
 }
+
 </style>

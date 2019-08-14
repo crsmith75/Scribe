@@ -1,6 +1,33 @@
 <template>
-  <div class ="container margin-top 5">
+
   <div id="account-form">
+    <div class="container">
+      <form @submit.prevent="handleSubmit">
+        <md-card class="md-layout-item md-alignment-center">
+            <md-card-header>
+              <div class="md-title">Add Accounts</div>
+            </md-card-header>
+
+            <md-card-content>
+              <md-field>
+                <label>Twitter Handle</label>
+                <md-input v-model="twitteraccount.handle"></md-input>
+              </md-field>
+
+              <md-field>
+                <label>Twitter ID</label>
+                <md-input v-model="twitteraccount.twitterid" type="number"></md-input>
+              </md-field>
+            </md-card-content>
+
+              <md-card-actions>
+                <md-button type="submit" class="md-raised" :disabled="sending">Add Account</md-button>
+              </md-card-actions>
+          </md-card>
+      </form>
+    </div>
+  </div>
+  <!-- <div id="account-form">
         <form @submit.prevent="handleSubmit">
         <label>Twitter Handle</label>
         <input 
@@ -29,7 +56,7 @@
           class="md-raised">Add Account</md-button>
         </form>
     </div>
-  </div>
+  </div> -->
 </template>
 
 
@@ -105,5 +132,12 @@
   }
   .md-button {
     background-color: #f56f12;
+  }
+  .md-title {
+    color: white;
+    text-align: left;
+  }
+  .md-card-header {
+    background-color: #29b6f6;
   }
 </style>
