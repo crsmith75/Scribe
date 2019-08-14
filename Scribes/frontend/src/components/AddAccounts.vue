@@ -36,12 +36,13 @@
               </md-card-actions>
           </md-card>
 
-          <md-snackbar :md-active.sync="success">
-            {{ twitteraccount.handle }} is now being tracked! We will notify you when their tweets are being Factomized!
+          <md-snackbar :md-duration="10000" :md-active.sync="success" md-persistent>
+            This Account is now being tracked! We will notify you when their tweets are being Factomized!
           </md-snackbar>
       </form>
     </div>
   </div>
+
 </template>
 
 
@@ -159,5 +160,9 @@
   }
   .md-error {
     color: red; 
+  }
+  .md-snackbar {
+    background-color: #f56f12;
+    color: white;
   }
 </style>

@@ -4,9 +4,9 @@
             <p v-if="twitteraccounts.length < 1" class="empty-table">
                 No account
             </p>
-            <md-table v-model="twitteraccounts" md-card v-else>
+            <md-table v-model="twitteraccounts" md-card md-fixed-header v-else>
                 <md-table-toolbar>
-                    <h1 class="md-title">Tracked Twitter Accounts</h1>
+                        <h1 class="md-title">Tracked Twitter Accounts</h1>
                 </md-table-toolbar>
 
                 <md-table-row slot="md-table-row" slot-scope="{ item }">
@@ -21,7 +21,9 @@
                             > Delete
                         </md-button>
                     </md-table-cell>
+
                 </md-table-row>
+
             </md-table>
         </div>
   </div>
@@ -33,6 +35,11 @@
     props: {
         twitteraccounts: Array,
     },
+    methods: {
+        sendNotification () {
+            this.$emit('change', this.twitteraccount)
+        }
+    }
   }
 </script>
 
@@ -45,5 +52,8 @@
 }
 .md-table-cell {
     text-align: left;
+}
+.container {
+    padding-bottom: 3%;
 }
 </style>
