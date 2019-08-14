@@ -1,15 +1,16 @@
 <template>
   <div id="app">
     <NavbarComponent />
-    <h1>Add An Account</h1>
+      <div class="container">
+        <h2>Start Securing the Twittersphere With the Power of the Factom Blockchain! </h2>
+      </div>
     <AddAccounts
       @add:twitteraccount="addAccount" />
     
-    <h2>Your Tracked Accounts</h2>
     <account-table 
       :twitteraccounts="twitteraccounts"
       @delete:twitteraccount="deleteAccount" 
-      @edit:twitteraccount="editAccount"/>
+      />
 
     <router-view />
   </div>
@@ -27,7 +28,7 @@ export default {
     components: {
       NavbarComponent,
       AddAccounts,
-      AccountTable
+      AccountTable,
 
   },
   data() {
@@ -112,7 +113,9 @@ export default {
         font-family: 'Roboto', sans-serif;
         
     }
-h1, h2 {
+h1, h2, h3 {
   text-align: center;
 }
+
+
 </style>
