@@ -34,11 +34,6 @@
     name: 'AccountTable',
     props: {
         twitteraccounts: Array,
-    },
-    methods: {
-        sendNotification () {
-            this.$emit('change', this.twitteraccount)
-        }
     }
   }
 </script>
