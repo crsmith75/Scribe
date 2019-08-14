@@ -43,7 +43,7 @@
 .md-title {
     text-align: left;
 }
-.md-label {
-    text-align: center;
+.md-table-cell {
+    text-align: left;
 }
 </style>

@@ -2,67 +2,60 @@
 
   <div id="account-form">
     <div class="container">
-      <form @submit.prevent="handleSubmit">
+      <form @submit.prevent="validateAccount">
         <md-card class="md-layout-item md-alignment-center">
             <md-card-header>
               <div class="md-title">Add Accounts</div>
             </md-card-header>
 
             <md-card-content>
-              <md-field>
-                <label>Twitter Handle</label>
-                <md-input v-model="twitteraccount.handle"></md-input>
+              <md-field :class="getValidationClass('handle')">
+                <label for="handle">Twitter Handle</label>
+                <md-input id ="handle"
+                          name="handle"
+                          v-model="twitteraccount.handle"
+                          :disabled="submitting">
+                </md-input>
+                <span class="md-error" v-if="!$v.twitteraccount.handle.required">Twitter Handle is Required</span>
+               
               </md-field>
 
-              <md-field>
-                <label>Twitter ID</label>
-                <md-input v-model="twitteraccount.twitterid" type="number"></md-input>
+              <md-field :class="getValidationClass('twitterid')">
+                <label for="twitterid">Twitter ID</label>
+                <md-input id="twitterid"
+                          name="twitterid"
+                          v-model="twitteraccount.twitterid"
+                          :disabled="submitting">
+                </md-input>
+                <span class="md-error" v-if="!$v.twitteraccount.twitterid.required">Twitter ID is Required</span>
               </md-field>
             </md-card-content>
 
               <md-card-actions>
-                <md-button type="submit" class="md-raised" :disabled="sending">Add Account</md-button>
+                <md-button type="submit" class="md-raised" :disabled="submitting">Add Account</md-button>
               </md-card-actions>
           </md-card>
+
+          <md-snackbar :md-active.sync="success">
+            {{ twitteraccount.handle }} is now being tracked! We will notify you when their tweets are being Factomized!
+          </md-snackbar>
       </form>
     </div>
   </div>
-  <!-- <div id="account-form">
-        <form @submit.prevent="handleSubmit">
-        <label>Twitter Handle</label>
-        <input 
-            ref="first"
-            type="text"
-            :class="{ 'has-error': submitting && invalidHandle }"
-            v-model="twitteraccount.handle"
-            @focus="clearStatus"
-            @keypress="clearStatus"
-        />
-        <label>Twitter ID</label>
-        <input 
-            type="text"
-            :class="{ 'has-error': submitting && invalidTwitterID }"
-            v-model="twitteraccount.twitterid"
-            @focus="clearStatus" 
-        />
-        <p v-if="error && submitting" class="error-message">
-            Please fill out all required fields
-        </p>
-        <p v-if="success" class="success-message">
-            Account successfully added! Wait Momentarily while the Chain ID is created!
-        </p>
-        <md-button 
-          v-on:click="notify"
-          class="md-raised">Add Account</md-button>
-        </form>
-    </div>
-  </div> -->
 </template>
 
 
 <script>
+
+  import { validationMixin } from 'vuelidate'
+  import {
+    required,
+    minLength
+  } from 'vuelidate/lib/validators'
+
   export default {
     name: "AddAccounts",
+    mixins: [validationMixin],
     data() {
       return {
         submitting: false,
@@ -71,7 +64,19 @@
         twitteraccount: {
           handle: '',
           twitterid: '',
-        },
+        }
+      }
+    },
+    validations: {
+      twitteraccount: {
+          handle: {
+            required,
+            minLength: minLength(1)
+          },
+          twitterid: {
+            required,
+            minLength: minLength(1)
+          }
       }
     },
     computed: {
@@ -94,7 +99,6 @@
             }
 
             this.$emit('add:twitteraccount', this.twitteraccount)
-            this.$refs.first.focus()
             this.twitteraccount = {
                 handle: '',
                 twitterid: '',
@@ -103,12 +107,25 @@
             this.success = true
             this.submitting = false
          },
+        getValidationClass (fieldName) {
+          const field = this.$v.twitteraccount[fieldName]
+
+          if (field) {
+            return {
+              'md-invalid': field.$invalid && field.$dirty
+            }
+          }
+        },
         clearStatus() {
             this.success = false
             this.error = false
         },
-        notify: function(event) {
-          alert(this.twitteraccount.handle + ' is now being tracked! We will notify you when their tweets begin being Factomized!')
+        validateAccount () {
+          this.$v.$touch()
+
+          if (!this.$v.$invalid) {
+            this.handleSubmit()
+          }
         }
     }
   }
@@ -139,5 +156,8 @@
   }
   .md-card-header {
     background-color: #29b6f6;
+  }
+  .md-error {
+    color: red; 
   }
 </style>

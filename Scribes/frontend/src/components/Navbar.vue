@@ -65,4 +65,7 @@ export default {
 .md-title:hover {
     color: #f56f12 !important;
 }
+.md-menu-content {
+    background-color: #29b6f6;
+}
 </style>
