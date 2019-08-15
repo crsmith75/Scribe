@@ -5,7 +5,10 @@ services:
     image: postgres
   web:
     build: .
-    command: Scribes runserver 127.0.0.1:8000
+    command: >
+      sh -c "python manage.py migrate &&
+             python setup.py develop && 
+             Scribes runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
@@ -21,12 +24,22 @@ services:
     ports:
       - "9092"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: "Scribes_faust:1:2"
+      KAFKA_ADVERTISED_PORT: 9092
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-  # worker:
-  #   build: Dockerfile.dev
-  #   context: ./twitteraccounts/api/
+  scribes-faust:
+    build: ./twitteraccounts/api/
+    command: >
+      sh -c "cd twitteraccounts/api/
+             faust -A Scribes_faust worker -l info"
+    volumes:
+      - .:/app
+    depends_on:
+      - zookeeper
+      - kafka
+      - web
+    environment:
+      - WORKER_PORT=6066
   

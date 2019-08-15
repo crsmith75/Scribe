@@ -1,12 +1,6 @@
-FROM python:3.7.1-alpine3.7
-
-RUN mkdir -p /app
-WORKDIR /app
-
-COPY requirements.txt requirements.txt
-
+FROM python:3
+ENV PYTHONUNBUFFERED 1
+WORKDIR /code
+COPY requirements.txt /code/
 RUN pip install -r requirements.txt
-
-COPY . .
-
-CMD ["faust", "-A", "Scribes_faust", "worker", "-l", "info"]
+COPY . /code/

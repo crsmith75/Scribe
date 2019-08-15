@@ -25,7 +25,7 @@ SECRET_KEY = '90pucu_3-sv_=*^r7hweghy666bxts8py9bp&j=q+v%zkzkn_1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -95,8 +95,11 @@ WSGI_APPLICATION = 'Scribes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
@@ -142,6 +145,11 @@ LOGOUT_REDIRECT_URL = "/"
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "assets"),
+    os.path.join(BASE_DIR, "frontend/dist")
+]
 
 # Custom User Model
 AUTH_USER_MODEL = "users.CustomUser"

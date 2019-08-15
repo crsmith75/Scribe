@@ -1,9 +1,5 @@
 {% extends "VueBase.html" %}
-{% load static %}
-
-{% block style %}
-    <link rel="stylesheet" href="{% static 'bundle.css' %}">
-{% endblock %}
+{% load render_bundle from webpack_loader %}
 
 {% block content %}
 <noscript>
@@ -11,8 +7,7 @@
 </noscript>
 
 <div id="app"></div>
-{% endblock %}
+<!-- built files will be auto injected -->
 
-{% block js %}
-    <script src="{% static 'bundle.js' %}"></script>
+{% render_bundle 'app' %}
 {% endblock %}

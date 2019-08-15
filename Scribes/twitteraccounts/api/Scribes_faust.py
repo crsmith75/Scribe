@@ -9,7 +9,7 @@ import time
 import tweepy
 from typing import List 
 
-from twitteraccounts.api.credentials import FCT_ADDRESS, EC_ADDRESS, TWITTER_KEY, TWITTER_SECRET, TWITTER_APP_KEY, TWITTER_APP_SECRET
+from credentials import FCT_ADDRESS, EC_ADDRESS, TWITTER_KEY, TWITTER_SECRET, TWITTER_APP_KEY, TWITTER_APP_SECRET
 from twitteraccounts.api.utils import filterTweets, getAllTweets, factomizeTweets, reconstructTweet, sendTweets, getTwitterCredentials
 from twitteraccounts.api.asyncfxns import tweetFetcher, StreamListener
 
