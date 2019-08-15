@@ -13,7 +13,7 @@ from credentials import FCT_ADDRESS, EC_ADDRESS, TWITTER_KEY, TWITTER_SECRET, TW
 from faust_utils import filterTweets, getAllTweets, factomizeTweets, reconstructTweet, sendTweets, getTwitterCredentials
 from faust_asyncfxns import tweetFetcher, StreamListener
 
-app = faust.App('Scribes_faust',  broker='kafka://localhost:9092')
+app = faust.App('Scribes_faust',  broker='kafka://0.0.0.0:9092')
 
 
 class TwitterAccount(faust.Record):

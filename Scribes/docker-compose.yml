@@ -3,6 +3,11 @@ version: '3'
 services:
   db:
     image: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
   web:
     build: .
     command: >
@@ -15,10 +20,14 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    networks:
+      - backend
   zookeeper:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
+    networks:
+      - backend
   kafka:
     image: wurstmeister/kafka
     ports:
@@ -26,20 +35,28 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_PORT: 9092
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - backend
   scribes-faust:
     build: ./twitteraccounts/api/
     command: >
-      sh -c "cd twitteraccounts/api/
-             faust -A Scribes_faust worker -l info"
+      sh -c "faust -A Scribes_faust worker -l info"
     volumes:
       - .:/app
     depends_on:
       - zookeeper
       - kafka
       - web
-    environment:
-      - WORKER_PORT=6066
+    ports:
+      - "6066:6066"
+      - "9092"
+    networks:
+      - backend
+    restart: on-failure
+
+networks:
+  backend:
+    driver: bridge
   
