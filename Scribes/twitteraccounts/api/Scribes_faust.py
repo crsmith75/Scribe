@@ -13,7 +13,8 @@ from credentials import FCT_ADDRESS, EC_ADDRESS, TWITTER_KEY, TWITTER_SECRET, TW
 from faust_utils import filterTweets, getAllTweets, factomizeTweets, reconstructTweet, sendTweets, getTwitterCredentials
 from faust_asyncfxns import tweetFetcher, StreamListener
 
-KAFKA_URL = os.environ.get('KAFKA_URL', 'kafka://localhost:9092')
+basedir = os.path.abspath(os.path.dirname(__file__))
+KAFKA_URL = os.environ.get('KAFKA_URL', 'kafka://localhost:9093')
 
 app = faust.App('Scribes_faust',  broker=KAFKA_URL)
 
