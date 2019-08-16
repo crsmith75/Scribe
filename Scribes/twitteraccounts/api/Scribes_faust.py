@@ -14,7 +14,7 @@ from faust_utils import filterTweets, getAllTweets, factomizeTweets, reconstruct
 from faust_asyncfxns import tweetFetcher, StreamListener
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-KAFKA_URL = os.environ.get('KAFKA_URL', 'kafka://localhost:9093')
+KAFKA_URL = os.environ.get('KAFKA_URL', 'kafka://localhost:9092')
 
 app = faust.App('Scribes_faust',  broker=KAFKA_URL)
 

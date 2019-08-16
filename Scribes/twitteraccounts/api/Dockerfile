@@ -4,3 +4,4 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 COPY . /code/
+CMD ["faust", "-A", "Scribes_faust", "worker", "-l", "info"]
