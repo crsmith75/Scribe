@@ -37,7 +37,7 @@ def send_toMem(sender, instance, *args, **kwargs):
     account = serializers.serialize('json', [ instance, ])
     twitteraccount  = account[1:-1]
     time.sleep(600)
-    kafka = KafkaClient("localhost:9092")
+    kafka = KafkaClient("kafka:9092")
     producer = SimpleProducer(kafka, value_serializer=lambda x: json.dumps(x).encode('utf-8'))
     print(twitteraccount)
     producer.send_messages('Scribes-faust', json.dumps(twitteraccount).encode('utf-8'))

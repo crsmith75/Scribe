@@ -1,24 +1,42 @@
 version: '3'
 
 services:
-  # db:
-  #   image: postgres
-  #   ports:
-  #     - "5432:5432"
-  # web:
-  #   build: .
-  #   command: >
-  #     sh -c "python manage.py migrate &&
-  #            python setup.py develop && 
-  #            Scribes runserver 0.0.0.0:8001"
-  #   volumes:
-  #     - .:/code
-  #   ports:
-  #     - "8001:8001"
-  #   depends_on:
-  #     - db
-    # networks:
-    #   - backend
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: >
+      sh -c "python manage.py migrate &&
+             python setup.py develop && 
+             Scribes runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - zookeeper 
+      - kafka
+  faust:
+    tty: true
+    build: ./twitteraccounts/api/faust
+    command: ./run.sh
+    depends_on:
+      - zookeeper
+      - kafka
+    environment:
+      - WORKER=daemon
+      - WORKER_PORT=6066
+      - KAFKA_BOOTSTRAP_SERVER=kafka://kafka:9092
+      - KAFKA_BOOSTRAP_SERVER_NAME=kafka
+      - KAFKA_BOOSTRAP_SERVER_PORT=9092
+    ports:
+      - "8084:80"
+      - "8001:8001"
+    volumes:
+      - ./scripts:/faust/scripts
   zookeeper:
     image: "confluentinc/cp-zookeeper"
     hostname: zookeeper
@@ -41,26 +59,4 @@ services:
       - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT_HOST://localhost:29092,PLAINTEXT://kafka:9092
       - KAFKA_BROKER_ID=1
-  scribes-faust:
-    tty: true
-    build: ./twitteraccounts/api/Faust
-    command: ./run.sh
-    depends_on:
-      - zookeeper
-      - kafka
-    environment:
-      - WORKER=daemon
-      - WORKER_PORT=6066
-      - KAFKA_BOOTSTRAP_SERVER=kafka://kafka:9092
-      - KAFKA_BOOSTRAP_SERVER_NAME=kafka
-      - KAFKA_BOOSTRAP_SERVER_PORT=9092
-    ports:
-      - "8084:80"
-      - "8000:8000"
-    
-    
-
-# networks:
-#   backend:
-#     driver: bridge
   

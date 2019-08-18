@@ -11,12 +11,10 @@ RUN apt-get install -y netcat && apt-get autoremove -y
 
 # Create unprivileged user
 RUN adduser --disabled-password --gecos '' myuser 
-    # && usermod -aG root myuser
 
+WORKDIR /faust/
 
-WORKDIR /Faust/
-
-COPY . .
+COPY . /faust
 
 RUN pip3 install -e .
 

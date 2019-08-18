@@ -44,7 +44,14 @@ export default {
     },
     async getAccounts() {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/twitteraccounts/')
+        const response = await fetch('http://localhost:8000/api/twitteraccounts/', {
+          method: 'GET',
+          mode: 'no-cors',
+          headers: {
+            "content-type": "application/json; charset=UTF-8",
+            'X-CSRFTOKEN': CSRF_TOKEN
+          },
+        })
         const data = await response.json()
         this.twitteraccounts = data
       } catch (error) {
@@ -53,7 +60,7 @@ export default {
     },
     async addAccount(twitteraccount) {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/twitteraccounts/', {
+        const response = await fetch('http://localhost:8000/api/twitteraccounts/', {
           method: 'POST',
           body: JSON.stringify(twitteraccount),
           headers: {
@@ -68,7 +75,7 @@ export default {
     },
     async deleteAccount(id) {
       try {
-        await fetch(`http://127.0.0.1:8000/api/twitteraccounts/${id}/`, {
+        await fetch(`http://localhost:8000/api/twitteraccounts/${id}/`, {
           method: 'DELETE',
           headers: {
             "content-type": "application/json; charset=UTF-8",
@@ -83,7 +90,7 @@ export default {
     },
     async editAccount(id, updatedAccount) {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/twitteraccounts/${id}/`, {
+        const response = await fetch(`http://localhost:8000/api/twitteraccounts/${id}/`, {
           method: 'PUT',
           body: JSON.stringify(updatedAccount),
           headers: {

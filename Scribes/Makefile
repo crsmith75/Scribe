@@ -1,4 +1,4 @@
-service=scribes-faust
+service=faust
 worker=daemon.app
 partitions=4
 
