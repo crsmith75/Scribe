@@ -5,6 +5,7 @@ services:
     image: postgres
     ports:
       - "5432:5432"
+
   web:
     build: .
     command: >
@@ -19,6 +20,7 @@ services:
       - db
       - zookeeper 
       - kafka
+
   faust:
     tty: true
     build: ./twitteraccounts/api/faust
@@ -37,26 +39,15 @@ services:
       - "8001:8001"
     volumes:
       - ./scripts:/faust/scripts
+
+  #From https://linuxhint.com/docker_compose_kafka/
   zookeeper:
-    image: "confluentinc/cp-zookeeper"
-    hostname: zookeeper
-    ports:
-      - 32181:32181
-    environment:
-      - ZOOKEEPER_CLIENT_PORT=32181
+    image: wurstmeister/zookeeper
+
   kafka:
-    image: confluentinc/cp-kafka
-    hostname: kafka
-    container_name: kafka
+    image: wurstmeister/kafka
     ports:
-    - 9092:9092
-    - 29092:29092
-    depends_on:
-    - zookeeper
+      - "9092:9092"
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:32181
-      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
-      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT_HOST://localhost:29092,PLAINTEXT://kafka:9092
-      - KAFKA_BROKER_ID=1
-  
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
