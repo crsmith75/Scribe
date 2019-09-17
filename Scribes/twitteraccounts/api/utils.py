@@ -40,7 +40,7 @@ def createChain(twitterid):
     )
 
     resp = walletd.new_chain(factomd, 
-                            [ "TwitterBank Record",str(tweet_id), "frontendrefinement25"],
+                            [ "TwitterBank Record",str(tweet_id), "frontendrefinement26"],
                             "This is the start of this users TwitterBank Records", 
                             ec_address=EC_ADDRESS) 
                     
