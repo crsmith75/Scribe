@@ -24,7 +24,7 @@ def createChain(twitterid):
     ec_address = EC_ADDRESS
 
     factomd = Factomd(
-    host='http://YourHostAddress:8088',
+    host='http://18.222.184.135:8088',
     fct_address=fct_address,
     ec_address=ec_address,
     username='rpc_username',
@@ -32,7 +32,7 @@ def createChain(twitterid):
     )
 
     walletd = FactomWalletd(
-    host='http://YourHostAddress:8089',
+    host='http://18.222.184.135:8089',
     fct_address=fct_address,
     ec_address=ec_address,
     username='rpc_username',
@@ -40,7 +40,7 @@ def createChain(twitterid):
     )
 
     resp = walletd.new_chain(factomd, 
-                            [ "TwitterBank Record",str(tweet_id), "frontendrefinement15"],
+                            [ "TwitterBank Record",str(tweet_id), "frontendrefinement25"],
                             "This is the start of this users TwitterBank Records", 
                             ec_address=EC_ADDRESS) 
                     
@@ -63,7 +63,7 @@ def factomizeTweets(tweetid,chain_id):
 
     #initializes factomd --> host will need to be changed to your server address
     factomd = Factomd(
-    host='http://YourHostAddress:8088',
+    host='http://18.222.184.135:8088',
     fct_address=fct_address,
     ec_address=ec_address,
     username='rpc_username',
@@ -72,7 +72,7 @@ def factomizeTweets(tweetid,chain_id):
 
     #initializes walletd --> host will need to be changed to your server address
     walletd = FactomWalletd(
-    host='http://YourHostAddress:8089',
+    host='http://18.222.184.135:8089',
     fct_address=fct_address,
     ec_address=ec_address,
     username='rpc_username',
