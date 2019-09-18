@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-ENTRYPOINT ["faust", "-A", "Scribes_faust", "worker", "-l", "info"]
+# ENTRYPOINT faust -A Scribes_faust worker -l info

@@ -1,20 +1,26 @@
-version: '3'
+# version: '3'
 
-services:
-  web:
-    build: ./web
-    command: >
-      sh -c "cd web &&
-             python setup.py develop && 
-             Scribes runserver 0.0.0.0:8000"
-    volumes:
-      - .:/code
-    ports:
-      - "8000:8000"
-  # faust:
-  #   build: ./twitteraccounts/api/
+# services:
+  # web:
+  #   build: ./web
+  #   command: >
+  #     sh -c "cd web &&
+  #            python setup.py develop && 
+  #            Scribes runserver 0.0.0.0:8000"
+  #   volumes:
+  #     - .:/code
   #   ports:
-  #     - 6066:6066
-  #   # depends_on:
-  #   #   - web
+  #     - "8000:8000"
+  # faust:
+  #   build: ./web/twitteraccounts/api
+  #   command: >
+  #     sh -c "faust -A Scribes_faust worker -l info"
+  #   ports:
+  #     - 6066:9090
+  #   environment:
+  #     - WORKER=daemon
+  #     - WORKER_PORT=6066
+  #     - KAFKA_BOOTSTRAP_SERVER=kafka://localhost:9092
+  #     - KAFKA_BOOSTRAP_SERVER_NAME=localhost
+  #     - KAFKA_BOOSTRAP_SERVER_PORT=9092
   

@@ -1,8 +1,8 @@
-TWITTER_KEY = "Your-Twitter-Key"
-TWITTER_SECRET = "Your-Twitter-Secret"
-TWITTER_APP_KEY = "Your-Twitter-App-Key"
-TWITTER_APP_SECRET = "Your-Twitter-App-Secret"
+TWITTER_KEY = "YourTwitterKEY"
+TWITTER_SECRET = "YourTwitterSecret"
+TWITTER_APP_KEY = "YourTwitterAppKEY"
+TWITTER_APP_SECRET = "YourTwitterAppSecret"
 
 #specify RPC credentials:
-FCT_ADDRESS = "Your-FCT-Address"
-EC_ADDRESS = "Your-EC-Address"
+FCT_ADDRESS = "YourFCTAddress"
+EC_ADDRESS = "YourECAddress"
