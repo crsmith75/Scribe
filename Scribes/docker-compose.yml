@@ -2,12 +2,19 @@ version: '3'
 
 services:
   web:
-    build: .
-    command: sh -c 
-            "python setup.py develop && 
-             Scribes runserver 127.0.0.1:8000"
+    build: ./web
+    command: >
+      sh -c "cd web &&
+             python setup.py develop && 
+             Scribes runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
       - "8000:8000"
+  # faust:
+  #   build: ./twitteraccounts/api/
+  #   ports:
+  #     - 6066:6066
+  #   # depends_on:
+  #   #   - web
   

@@ -1,0 +1,4 @@
+[console_scripts]
+Scribes = Scribes.__main__:main
+Scribes-faust = faustapp.app:main
+

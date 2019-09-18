@@ -1,5 +1,1 @@
-Scribes
-core
 faustapp
-twitteraccounts
-users
