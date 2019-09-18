@@ -25,7 +25,7 @@ SECRET_KEY = '90pucu_3-sv_=*^r7hweghy666bxts8py9bp&j=q+v%zkzkn_1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
