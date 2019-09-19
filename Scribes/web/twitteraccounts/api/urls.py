@@ -12,8 +12,4 @@ urlpatterns = [
     path("twitteraccounts/<int:pk>/",
           qv.twitterAccountRUDAPIView.as_view(),
           name="account-detail"),
-
-#     path("twitteraccounts/<int:pk>/track/",
-#           qv.twitterAccountTrackAPIView.as_view(),
-#           name="account-track")
 ]

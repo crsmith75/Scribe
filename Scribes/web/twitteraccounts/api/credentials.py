@@ -1,6 +1,6 @@
-TWITTER_KEY = "YourTwitterKEY"
+TWITTER_KEY = "YourTwitterKey"
 TWITTER_SECRET = "YourTwitterSecret"
-TWITTER_APP_KEY = "YourTwitterAppKEY"
+TWITTER_APP_KEY = "YourTwitterAppKey"
 TWITTER_APP_SECRET = "YourTwitterAppSecret"
 
 #specify RPC credentials:
