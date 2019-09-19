@@ -85,13 +85,13 @@ faust -A Scribes_faust worker -l info
 ## Using the Software
 You will be navigated to a Login Screen. Click 'Create An Account' and then fill out the corresponding form. Once you do you will enter the home screen which is a simple UI with a form and list where you can add and manage the accounts you want to track. Simply enter a users twitter handle and twitter id and then a chain will be created for the account. 
 
-To find an account's twitter id, visit https://tweeterid.com/ and enter their twitter handle and the twitter id will be provided for you. Once you hit submit/enter button in roughly 10 minutes you will see the account appear on the UI with its corresponding chainid on the Factom testnet. 
+To find an account's twitter id, visit https://tweeterid.com/ and enter their twitter handle and the twitter id will be provided for you. Once you hit submit/enter button in roughly **10 minutes** you will see the account appear on the UI with its corresponding chainid on the Factom testnet. 
 
-**Note** The chain is created instantly, however, due to timing issues with the mempool and writing of tweets to the chain, this was the most optimal solution I could devise at the time. 
+**Note:** The chain is created instantly, however, due to timing issues with the mempool and writing of tweets to the chain, this was the most optimal solution I could devise at the time. 
 
-**Note** The chain ID is derived from the extids used in the createChain method in the /Scribes/web/twitteraccounts/api/utils.py file. If you get an 'INVALID PARAMS' error from the Factom API when tracking an Account it is because the chain  already exists. Change the third entry to whatever suits your desired purpose for running the software. Once in production, something concrete will be set.
+**Note:** The chain ID is derived from the extids used in the createChain method in the /Scribes/web/twitteraccounts/api/utils.py file. If you get an 'INVALID PARAMS' error from the Factom API when tracking an Account it is because the chain  already exists. Change the third entry to whatever suits your desired purpose for running the software. Once in production, something concrete will be set.
 
-**Note** If you run into any errors it could be on account of the squlite3 db that django uses as a default, so either delete the file for it and try again or plug another database of your choosing into the settings.py file within the /Scribes/web/Scribes/ directory. 
+**Note:** If you run into any errors it could be on account of the squlite3 db that django uses as a default, so either delete the file for it and try again or plug another database of your choosing into the settings.py file within the /Scribes/web/Scribes/ directory. 
 
 ## Next Steps:
 
