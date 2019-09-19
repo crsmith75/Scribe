@@ -1,12 +1,9 @@
 # Scribe
 
-Consensus Networks in Conjunction with TFA are excited to bring you the first installment of our opensource software for the
-Factom-Twitter Project (Current Working Names are "Codex or Vinyl"). This will be a two sided platform in which there
+Consensus Networks in Conjunction with TFA are excited to bring you Scribe. This will be a two sided platform in which there
 is one application that will be used by those who want to contribute compute power and factoids to track various account's 
 tweets and write them to the Factom Blockchain and then a consumer facing application that can then be used to verify if
-a tweet for an account has been secured by factom and if so by how many different accounts. This repository contains the codebase
-for the non-consumer facing application, or in other words the software that will be run by those who are securing tweets to
-the Factom blockchain (Current working name for these Participants is Scribes).
+a tweet for an account has been secured by factom and if so by how many different accounts. This repository contains the codebasefor the non-consumer facing application, or in other words the software that will be run by those who are securing tweets to the Factom blockchain (Scribes).
 
 ## Current Status of the Software:
 Scribes can download the software to run as a native webapp, create an account, and have a simple UI interface where they
