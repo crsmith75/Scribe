@@ -12,7 +12,7 @@ the Factom blockchain (Current working name for these Participants is Scribes).
 Scribes can download the software to run as a native webapp, create an account, and have a simple UI interface where they
 Can add accounts by entering a twitter handle and twitter id for a factom account. A list of tracked accounts will then 
 be populated along with the corresponding Factom Testnet Chain ID for the Chain that will be created of all of that account's
-Factomized Tweets. Currently, python scripts are written for the project that will:
+Factomized Tweets. Currently, python scripts are written for the project that will run asynchronously in the background via Robinhood Faust (library and info here: https://github.com/robinhood/faust).
 
 1.) Use an accounts twitter handle to gather the account's ~3000 most recent tweets, clean them so that only the account's
 original tweets remain (i.e no retweets) and then write them to a kafka-based message queue that can then be pulled from by 
@@ -23,10 +23,7 @@ retweets, comments, replies, etc. so that only the account's native tweets trigg
 tweets will then be written to a message queue in kafka, where they may then be consumed by a kafak-consumer and written 
 to the Factom blockchain.
 
-However, the integration of these scripts into the backend as asynchronous tasks is an ongoing effort and is currently underway
-using the Robinhood Faust framework to handle asynchronous task management and message queuing so that everytime an account
-is added by a Scribe these processes will commense in the background and factomized tweets will be viewable on a Factom Block 
-Explorer (either the TFA Explorer or the Factom Control Panel). A Beta-version of the sftware with this functionality if completed, however, rigorous testing still needs to be completed before the software is production ready. I have included the scripts being used in a separate folder titled "Python Factomization Scripts" so that you can see how the software works, and what is being done behind the scenes or if you wish to contribute to the Repo yourself. For more information on how faust works for this process if you are interested or wish to collaborate on syncing up the asynchronous task and message queues you can find more information here: https://github.com/robinhood/faust
+**Disclaimer** Software is still in beta. I have included the python scripts being used in a separate folder titled "Python Factomization Scripts" if you wish to contribute to the Repo yourself or are interested in messing around with them. For more information on how faust works for this process here: https://github.com/robinhood/faust
 
 ## Setting Up/Configuring the Software:
 
