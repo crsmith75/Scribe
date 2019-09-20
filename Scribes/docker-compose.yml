@@ -1,36 +1,36 @@
-# version: '3'
+version: '3'
 
+services:
+  web:
+    build: ./web
+    command: >
+      sh -c "cd web &&
+             python setup.py develop && 
+             Scribes runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    networks:
+      - scribe-net
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - scribe-net
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - scribe-net
 
-
-### NOTE ###
-# If you want to run locally, you will need to go into App.vue in the 
-# web/frontend/ directory and change the api request adresss to 0.0.0.0
-# This will then build the web app natively with kafka in the same container
-# Still cannot get app to communicate with kafka from conatiner though
-
-# services:
-#   web:
-#     build: ./web
-#     command: >
-#       sh -c "cd web &&
-#              python setup.py develop && 
-#              Scribes runserver 0.0.0.0:8000"
-#     volumes:
-#       - .:/code
-#     ports:
-#       - "8000:8000"
-#   zookeeper:
-#     image: wurstmeister/zookeeper
-#     ports:
-#       - "2181:2181"
-#   kafka:
-#     image: wurstmeister/kafka
-#     ports:
-#       - "9092:9092"
-#     environment:
-#       KAFKA_ADVERTISED_HOST_NAME: localhost
-#       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-#       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-#     volumes:
-#       - /var/run/docker.sock:/var/run/docker.sock
-  
+networks:
+  scribe-net:
