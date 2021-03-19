@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-djangorestframework = "==3.10.1"
+djangorestframework = "==3.11.2"
 django-allauth = "==0.39.1"
 django-rest-auth = "==0.9.5"
 aiocontextvars = "==0.2.2"
