@@ -1,18 +1,18 @@
+-i https://pypi.org/simple/
 aiocontextvars==0.2.2
-aiohttp==3.5.4
 aiohttp-cors==0.7.0
+aiohttp==3.5.4
 async-timeout==3.0.1
 attrs==19.1.0
 certifi==2019.6.16
 chardet==3.0.4
-Click==7.0
+click==7.0
 colorclass==2.2.0
 colorlog==4.0.2
 confusable-homoglyphs==3.2.0
 contextvars==2.4
 croniter==0.3.30
 defusedxml==0.6.0
-Django==2.2.3
 django-allauth==0.39.1
 django-crispy-forms==1.7.2
 django-material==1.5.8
@@ -20,12 +20,13 @@ django-materialize==1.0.1a2
 django-registration==3.0.1
 django-rest-auth==0.9.5
 django-webpack-loader==0.6.0
+django==2.2.21
 djangorestframework==3.10.1
 ed25519==1.5
 factom-api==0.1.1
 faust==1.7.4
+idna-ssl==1.1.0 ; python_version < '3.7'
 idna==2.8
-idna-ssl==1.1.0
 immutables==0.9
 kafka-python==1.4.6
 mode==4.0.1
@@ -35,15 +36,15 @@ numpy==1.17.0
 oauthlib==3.0.2
 opentracing==1.3.0
 pandas==0.25.0
-Pillow==6.1.0
-PySocks==1.7.0
+pillow==6.1.0
+pysocks==1.7.0
 python-bitcoinlib==0.10.1
 python-dateutil==2.8.0
 python-identitykeys==0.2.1
 python3-openid==3.1.0
 pytz==2019.1
-requests==2.22.0
 requests-oauthlib==1.2.0
+requests==2.22.0
 robinhood-aiokafka==1.0.3
 six==1.12.0
 sqlparse==0.3.0
